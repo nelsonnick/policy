@@ -9,5 +9,8 @@
         <module name="policy" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="policy" target="1.7" />
+    </bytecodeTargetLevel>
   </component>
 </project>

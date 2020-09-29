@@ -25,8 +25,10 @@
     <orderEntry type="library" name="Maven: com.itextpdf:sign:7.1.12" level="project" />
     <orderEntry type="library" name="Maven: com.itextpdf:styled-xml-parser:7.1.12" level="project" />
     <orderEntry type="library" name="Maven: com.itextpdf:svg:7.1.12" level="project" />
-    <orderEntry type="library" name="Maven: com.itextpdf:itextpdf:5.5.13.2" level="project" />
     <orderEntry type="library" name="Maven: com.itextpdf:itext-asian:5.2.0" level="project" />
     <orderEntry type="library" name="Maven: org.bouncycastle:bcprov-jdk15on:1.54" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.pdfbox:pdfbox:2.0.5" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.pdfbox:fontbox:2.0.5" level="project" />
+    <orderEntry type="library" name="Maven: commons-logging:commons-logging:1.2" level="project" />
   </component>
 </module>

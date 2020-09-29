@@ -34,11 +34,6 @@
         </dependency>
         <dependency>
             <groupId>com.itextpdf</groupId>
-            <artifactId>itextpdf</artifactId>
-            <version>5.5.13.2</version>
-        </dependency>
-        <dependency>
-            <groupId>com.itextpdf</groupId>
             <artifactId>itext-asian</artifactId>
             <version>5.2.0</version>
         </dependency>
@@ -47,7 +42,12 @@
             <artifactId>bcprov-jdk15on</artifactId>
             <version>1.54</version>
         </dependency>
-
+        <!--  以下依赖是用pdfbox来对pdf进行加密   -->
+        <dependency>
+            <groupId>org.apache.pdfbox</groupId>
+            <artifactId>pdfbox</artifactId>
+            <version>2.0.5</version>
+        </dependency>
 
     </dependencies>
 
