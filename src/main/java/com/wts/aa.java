@@ -1,23 +1,19 @@
 package com.wts;
 
-import com.itextpdf.io.font.FontConstants;
-import com.itextpdf.io.font.FontProgram;
 import com.itextpdf.io.font.PdfEncodings;
-import com.itextpdf.io.font.otf.Glyph;
-import com.itextpdf.kernel.colors.Color;
 import com.itextpdf.kernel.colors.DeviceRgb;
 import com.itextpdf.kernel.font.PdfFont;
 import com.itextpdf.kernel.font.PdfFontFactory;
 import com.itextpdf.kernel.geom.PageSize;
 import com.itextpdf.kernel.pdf.*;
-import com.itextpdf.kernel.pdf.colorspace.PdfColorSpace;
 import com.itextpdf.layout.Document;
 import com.itextpdf.layout.element.List;
 import com.itextpdf.layout.element.ListItem;
 import com.itextpdf.layout.element.Paragraph;
-import com.itextpdf.layout.property.HorizontalAlignment;
 import com.itextpdf.layout.property.TextAlignment;
-import com.itextpdf.text.Chapter;
+import com.itextpdf.text.Chunk;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.pdf.PdfAction;
 
 import java.io.*;
 
@@ -39,7 +35,6 @@ public class aa {
                 .setFontColor(new DeviceRgb(0,0,0))
                 .setTextAlignment(TextAlignment.CENTER)
         );
-
 
         document.add(new Paragraph("基本信息")
                 .setFont(subFont)
@@ -148,7 +143,7 @@ public class aa {
                 .setFirstLineIndent(24)
         );
 
-
+        Paragraph cTitle = new Paragraph("A1");
 
 
 

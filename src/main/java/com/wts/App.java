@@ -67,27 +67,16 @@ public class App {
         whiteFont.setColor(BaseColor.WHITE);
 
 
-
-        Paragraph title = new Paragraph("中华人民共和国劳动法", blackFont);
-        document.add(title);
-        Chapter chapter = new Chapter(title, 1);
-        document.add(chapter);
-        document.add(chapter.addSection(new Paragraph("基本信息", blackFont), 2));
-        List unorderedList = new List(List.UNORDERED);
-        unorderedList.add(new ListItem(new Paragraph("发文字号：中华人民共和国主席令第24号", blackFont)));
-        unorderedList.add(new ListItem(new Paragraph("效力级别：法律", blackFont)));
-        unorderedList.add(new ListItem(new Paragraph("文件时效：现行有效", blackFont)));
-        unorderedList.add(new ListItem(new Paragraph("发布日期：2018-12-29", blackFont)));
-        unorderedList.add(new ListItem(new Paragraph("实施日期：2018-12-29", blackFont)));
-        unorderedList.add(new ListItem(new Paragraph("发布机关：全国人大常委会", blackFont)));
-        document.add(unorderedList);
-
-
-        document.newPage();
-
-        title = new Paragraph("Section A");
+        Paragraph title = new Paragraph("法律", blackFont);
+        title.setAlignment(Element.ALIGN_CENTER);
+        Chapter chapter = new Chapter(1);
+        chapter.setTitle(title);
+        chapter.setBookmarkTitle("法律");
+        title = new Paragraph("中华人民共和国劳动法", blackFont);
+        title.setAlignment(Element.ALIGN_CENTER);
         Section section = chapter.addSection(title);
-        section.setBookmarkTitle("bmk");
+        section.setBookmarkTitle("劳动法");
+        section.setTitle(title);
         section.setIndentation(30);
         section.setBookmarkOpen(false);
         section.setNumberStyle(
@@ -97,7 +86,43 @@ public class App {
         subsection.setIndentationLeft(20);
         subsection.setNumberDepth(1);
 
-        document.add(chapter);
+        document.add(section);
+
+//        section.setBookmarkTitle("中华人民共和国劳动法");
+//        section.setIndentation(30);
+//        section.setBookmarkOpen(false);
+//        section.setNumberStyle(
+//                Section.NUMBERSTYLE_DOTTED_WITHOUT_FINAL_DOT);
+//        document.add(section);
+////        Chapter chapter = new Chapter(title, 1);
+////        document.add(chapter);
+//        document.add(chapter.addSection(new Paragraph("基本信息", blackFont), 2));
+//        List unorderedList = new List(List.UNORDERED);
+//        unorderedList.add(new ListItem(new Paragraph("发文字号：中华人民共和国主席令第24号", blackFont)));
+//        unorderedList.add(new ListItem(new Paragraph("效力级别：法律", blackFont)));
+//        unorderedList.add(new ListItem(new Paragraph("文件时效：现行有效", blackFont)));
+//        unorderedList.add(new ListItem(new Paragraph("发布日期：2018-12-29", blackFont)));
+//        unorderedList.add(new ListItem(new Paragraph("实施日期：2018-12-29", blackFont)));
+//        unorderedList.add(new ListItem(new Paragraph("发布机关：全国人大常委会", blackFont)));
+//        document.add(unorderedList);
+
+
+        document.newPage();
+
+//        title = new Paragraph("Section A");
+//        Section section = chapter.addSection(title);
+//        section.setBookmarkTitle("bmk");
+//        section.setIndentation(30);
+//        section.setBookmarkOpen(false);
+//        section.setNumberStyle(
+//                Section.NUMBERSTYLE_DOTTED_WITHOUT_FINAL_DOT);
+//
+//        Section subsection = section.addSection(new Paragraph("Sub Section A"));
+//        subsection.setIndentationLeft(20);
+//        subsection.setBookmarkTitle("");
+//        subsection.setNumberDepth(1);
+//
+//        document.add(chapter);
 
 
 
