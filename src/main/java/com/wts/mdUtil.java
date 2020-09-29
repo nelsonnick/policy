@@ -107,7 +107,7 @@ public class mdUtil {
                             .setTextAlignment(TextAlignment.CENTER)
                             .setKeepWithNext(true)
                             .setDestination(name);
-                } else if (line.startsWith("# 基本信息") || line.startsWith("# 法律修订") || line.startsWith("# 修订信息") || line.startsWith("# 正文") || line.startsWith("# 附")) {
+                } else if (line.startsWith("# ")) {
                     p = new Paragraph(line.replace("# ", ""));
                     name = String.format("title%02d", counter++);
                     outline2 = createOutline(outline1, pdf, line.replace("# ", ""), name);
