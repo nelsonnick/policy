@@ -355,43 +355,43 @@ public class mdUtil {
         if (!file.exists()) {//如果文件夹不存在
             file.mkdir();//创建文件夹
         }
-        file = new File("D:\\人社政策文档库\\F规范性文件\\省厅");
+        file = new File("D:\\人社政策文档库\\F规范性文件\\C省厅");
         if (!file.exists()) {//如果文件夹不存在
             file.mkdir();//创建文件夹
         }
-        file = new File("D:\\人社政策文档库\\F规范性文件\\省厅\\劳动厅");
+        file = new File("D:\\人社政策文档库\\F规范性文件\\C省厅\\劳动厅");
         if (!file.exists()) {//如果文件夹不存在
             file.mkdir();//创建文件夹
         }
-        file = new File("D:\\人社政策文档库\\F规范性文件\\省厅\\人社厅");
+        file = new File("D:\\人社政策文档库\\F规范性文件\\C省厅\\人社厅");
         if (!file.exists()) {//如果文件夹不存在
             file.mkdir();//创建文件夹
         }
-        file = new File("D:\\人社政策文档库\\F规范性文件\\省厅\\人事厅");
+        file = new File("D:\\人社政策文档库\\F规范性文件\\C省厅\\人事厅");
         if (!file.exists()) {//如果文件夹不存在
             file.mkdir();//创建文件夹
         }
-        file = new File("D:\\人社政策文档库\\F规范性文件\\省厅\\其他");
+        file = new File("D:\\人社政策文档库\\F规范性文件\\C省厅\\其他");
         if (!file.exists()) {//如果文件夹不存在
             file.mkdir();//创建文件夹
         }
-        file = new File("D:\\人社政策文档库\\F规范性文件\\市局");
+        file = new File("D:\\人社政策文档库\\F规范性文件\\D市局");
         if (!file.exists()) {//如果文件夹不存在
             file.mkdir();//创建文件夹
         }
-        file = new File("D:\\人社政策文档库\\F规范性文件\\市局\\劳动局");
+        file = new File("D:\\人社政策文档库\\F规范性文件\\D市局\\劳动局");
         if (!file.exists()) {//如果文件夹不存在
             file.mkdir();//创建文件夹
         }
-        file = new File("D:\\人社政策文档库\\F规范性文件\\市局\\人事局");
+        file = new File("D:\\人社政策文档库\\F规范性文件\\D市局\\人事局");
         if (!file.exists()) {//如果文件夹不存在
             file.mkdir();//创建文件夹
         }
-        file = new File("D:\\人社政策文档库\\F规范性文件\\市局\\人社局");
+        file = new File("D:\\人社政策文档库\\F规范性文件\\D市局\\人社局");
         if (!file.exists()) {//如果文件夹不存在
             file.mkdir();//创建文件夹
         }
-        file = new File("D:\\人社政策文档库\\F规范性文件\\市局\\其他");
+        file = new File("D:\\人社政策文档库\\F规范性文件\\D市局\\其他");
         if (!file.exists()) {//如果文件夹不存在
             file.mkdir();//创建文件夹
         }
