@@ -6,6 +6,8 @@ import com.itextpdf.kernel.font.PdfFont;
 import com.itextpdf.kernel.font.PdfFontFactory;
 import com.itextpdf.kernel.geom.PageSize;
 import com.itextpdf.kernel.pdf.*;
+import com.itextpdf.kernel.pdf.navigation.PdfDestination;
+import com.itextpdf.kernel.pdf.navigation.PdfExplicitDestination;
 import com.itextpdf.layout.Document;
 import com.itextpdf.layout.element.List;
 import com.itextpdf.layout.element.ListItem;
@@ -15,10 +17,25 @@ import com.itextpdf.text.Chunk;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.pdf.PdfAction;
 
+import javax.print.attribute.standard.Destination;
 import java.io.*;
 
 public class aa {
     public static final String DEST = "D:/test1.pdf";
+
+    public static PdfOutline createOutline(
+            PdfOutline outline, PdfDocument pdf, String title, String name) {
+        if (outline ==  null) {
+            outline = pdf.getOutlines(false);
+            outline = outline.addOutline(title);
+            outline.addDestination(
+                    PdfDestination.makeDestination(new PdfString(name)));
+            return outline;
+        }
+        PdfOutline kid = outline.addOutline(title);
+        kid.addDestination(PdfDestination.makeDestination(new PdfString(name)));
+        return outline;
+    }
 
     public static void main(String args[]) throws IOException {
         PdfDocument pdf = new PdfDocument(new PdfWriter(DEST));
@@ -75,7 +92,8 @@ public class aa {
                 .setFontSize(12)
                 .setFontColor(new DeviceRgb(0,0,0))
         );
-        document.add(new Paragraph("第一条")
+        Paragraph p = new Paragraph("第一条");
+        document.add(p
                 .setFont(subFont)
                 .setFontSize(12)
                 .setFontColor(new DeviceRgb(0,0,0))
@@ -150,6 +168,46 @@ public class aa {
         //Add new page
         PageSize ps = PageSize.A4;
         PdfPage page = pdf.addNewPage(ps);
+
+        PdfOutline title = pdf.getOutlines(false);
+        title.setTitle("中华人民共和国劳动法");
+        PdfOutline basicInfo = title.addOutline("基本信息");
+        PdfOutline changeInfo = title.addOutline("文件修订");
+        PdfOutline mainText = title.addOutline("正文");
+        PdfOutline first = mainText.addOutline("第一章");
+        PdfOutline second = mainText.addOutline("第二章");
+        PdfOutline first1 = first.addOutline("第一条");
+        PdfOutline first2 = first.addOutline("第二条");
+        PdfOutline second1 = second.addOutline("第一条");
+        PdfOutline second2 = second.addOutline("第二条");
+        first1.addDestination(PdfDestination.makeDestination(new PdfString("第一条")));
+
+
+//        String name, line;
+//        Paragraph s;
+//        line = "第一条";
+//        int counter = 0;
+//        PdfOutline outline = null;
+//        name = String.format("title%02d", counter++);
+//        System.out.println(name);
+//        outline = createOutline(outline, pdf, line, name);
+//        s = new Paragraph(line);
+//        s.setFontSize(12)
+//                .setKeepWithNext(true)
+//                .setDestination(name);
+//        document.add(p);
+
+
+
+
+//        PdfOutline root = pdf.getOutlines(false);
+//        PdfOutline movieBookmark = root.addOutline("fffffffffffff");
+//        movieBookmark.addAction(PdfAction.createGoTo(
+//                PdfExplicitDestination.createFitH(pdf.getLastPage(),
+//                        pdf.getLastPage().getPageSize().getTop())));
+//        PdfOutline link = movieBookmark.addOutline("link to IMDB");
+//        link.addAction(PdfAction.createURI((String.format(RESOURCE, movie.getImdb()))));
+
 
         document.close();
 
