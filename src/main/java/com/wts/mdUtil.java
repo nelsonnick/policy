@@ -13,12 +13,19 @@ import com.itextpdf.kernel.pdf.navigation.PdfDestination;
 import com.itextpdf.layout.Document;
 import com.itextpdf.layout.element.Paragraph;
 import com.itextpdf.layout.property.TextAlignment;
+import com.wts.util.HeadertFooterHandler;
+import com.wts.util.Parameter;
+import com.wts.util.WaterPrintHandler;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.encryption.*;
 
 import java.io.*;
 
 public class mdUtil {
+//    public static String MdFilesPath = "C:\\Users\\nelso\\OneDrive\\人社政策文档库";
+    public static String MdFilesPath = "C:\\人社政策文档库";
+    public static String PdfFilesPath = "D:\\";
+
     /**
      * 创建子目录
      */
@@ -64,10 +71,6 @@ public class mdUtil {
      */
     public static void Md2Pdf(String MdFilePath, String PdfFilePath, String policyName,
                               String waterPrintStr, String password) throws Exception {
-        String simhei = "C:/Windows/Fonts/simhei.ttf";//黑体
-        String simfang = "C:/Windows/Fonts/simfang.ttf";//仿宋
-        String simkai = "C:/Windows/Fonts/simfang.ttf";//楷体
-        String simsun = "C:/Windows/Fonts/simsun.ttf";//宋体
 
         PdfDocument pdf = new PdfDocument(new PdfWriter(PdfFilePath));
 
@@ -79,9 +82,9 @@ public class mdUtil {
         waterPrintHandler.setInfo(waterPrintStr);
 
         Document document = new Document(pdf);
-        PdfFont heiti = PdfFontFactory.createFont(simhei, PdfEncodings.IDENTITY_H, true);
-        PdfFont fangsong = PdfFontFactory.createFont(simfang, PdfEncodings.IDENTITY_H, true);
-        PdfFont kaiti = PdfFontFactory.createFont(simkai, PdfEncodings.IDENTITY_H, true);
+        PdfFont heiti = PdfFontFactory.createFont(Parameter.heiti, PdfEncodings.IDENTITY_H, true);
+        PdfFont fangsong = PdfFontFactory.createFont(Parameter.fangsong, PdfEncodings.IDENTITY_H, true);
+        PdfFont kaiti = PdfFontFactory.createFont(Parameter.kaiti, PdfEncodings.IDENTITY_H, true);
 
         BufferedReader br = new BufferedReader(new FileReader(MdFilePath));
         String name, line;
@@ -100,6 +103,7 @@ public class mdUtil {
                     p = new Paragraph(line);
                     name = String.format("title%02d", counter++);
                     outline1 = createOutline(outline1, pdf, line, name);
+                    outline1.setOpen(false);
                     p.setKeepTogether(true)
                             .setFont(heiti)
                             .setFontSize(26)
@@ -204,12 +208,11 @@ public class mdUtil {
 
 
     /**
+     * @param MdFilesPaths MD文件夹目录
      * 使用递归遍历文件夹及子文件夹中文件
-     *
-     * @param MdFilesPath MD文件夹目录
      */
-    public static void filesDirs(String MdFilesPath) throws Exception {
-        File file = new File(MdFilesPath);
+    public static void filesDirs(String MdFilesPaths) throws Exception {
+        File file = new File(MdFilesPaths);
         if (file.isDirectory()) {
             File[] files = file.listFiles();
             assert files != null;
@@ -219,186 +222,30 @@ public class mdUtil {
         } else {
             String policyName = file.getName().replace(".md","");
             String MdFilePath = file.getAbsolutePath();
-            String PdfFilePath = file.getAbsolutePath().replace("C:\\Users\\nelso\\OneDrive\\人社政策文档库", "D:\\人社政策文档库").replace(".md", ".pdf");
+            String PdfFilePath = file.getAbsolutePath().replace(MdFilesPath, "D:\\人社政策文档库").replace(".md", ".pdf");
             Md2Pdf(MdFilePath, PdfFilePath, policyName, "", "");
+        }
+    }
+    /**
+     * @param sourceFile  原文件
+     * @param destFile    目标文件
+     * 递归复制文件夹结构
+     */
+    public static void copyFolder(File sourceFile, File destFile) {
+        if(sourceFile.isDirectory()){
+            File newFolder = new File(destFile,sourceFile.getName());
+            newFolder.mkdirs();
+            File[] fileArray=sourceFile.listFiles();
+            assert fileArray != null;
+            for (File file : fileArray) {
+                copyFolder(file,newFolder);
+            }
         }
     }
 
     public static void main(String[] args) throws Exception {
-        String MdFilesPath = "C:\\Users\\nelso\\OneDrive\\人社政策文档库";
-
-        File file = new File("D:\\人社政策文档库");
-        if (!file.exists()) {//如果文件夹不存在
-            file.mkdir();//创建文件夹
-        }
-        file = new File("D:\\人社政策文档库\\A法律");
-        if (!file.exists()) {//如果文件夹不存在
-            file.mkdir();//创建文件夹
-        }
-        file = new File("D:\\人社政策文档库\\B行政法规");
-        if (!file.exists()) {//如果文件夹不存在
-            file.mkdir();//创建文件夹
-        }
-        file = new File("D:\\人社政策文档库\\B行政法规\\国务院令");
-        if (!file.exists()) {//如果文件夹不存在
-            file.mkdir();//创建文件夹
-        }
-        file = new File("D:\\人社政策文档库\\B行政法规\\省政府令");
-        if (!file.exists()) {//如果文件夹不存在
-            file.mkdir();//创建文件夹
-        }
-        file = new File("D:\\人社政策文档库\\B行政法规\\市政府令");
-        if (!file.exists()) {//如果文件夹不存在
-            file.mkdir();//创建文件夹
-        }
-        file = new File("D:\\人社政策文档库\\C部颁规章");
-        if (!file.exists()) {//如果文件夹不存在
-            file.mkdir();//创建文件夹
-        }
-        file = new File("D:\\人社政策文档库\\C部颁规章\\劳动部令");
-        if (!file.exists()) {//如果文件夹不存在
-            file.mkdir();//创建文件夹
-        }
-        file = new File("D:\\人社政策文档库\\C部颁规章\\人社部令");
-        if (!file.exists()) {//如果文件夹不存在
-            file.mkdir();//创建文件夹
-        }
-        file = new File("D:\\人社政策文档库\\C部颁规章\\人事部令");
-        if (!file.exists()) {//如果文件夹不存在
-            file.mkdir();//创建文件夹
-        }
-        file = new File("D:\\人社政策文档库\\C部颁规章\\其他");
-        if (!file.exists()) {//如果文件夹不存在
-            file.mkdir();//创建文件夹
-        }
-        file = new File("D:\\人社政策文档库\\D地方性法规");
-        if (!file.exists()) {//如果文件夹不存在
-            file.mkdir();//创建文件夹
-        }
-        file = new File("D:\\人社政策文档库\\D地方性法规\\省人大");
-        if (!file.exists()) {//如果文件夹不存在
-            file.mkdir();//创建文件夹
-        }
-        file = new File("D:\\人社政策文档库\\D地方性法规\\市人大");
-        if (!file.exists()) {//如果文件夹不存在
-            file.mkdir();//创建文件夹
-        }
-        file = new File("D:\\人社政策文档库\\E司法解释");
-        if (!file.exists()) {//如果文件夹不存在
-            file.mkdir();//创建文件夹
-        }
-        file = new File("D:\\人社政策文档库\\E司法解释\\最高法");
-        if (!file.exists()) {//如果文件夹不存在
-            file.mkdir();//创建文件夹
-        }
-        file = new File("D:\\人社政策文档库\\E司法解释\\最高检");
-        if (!file.exists()) {//如果文件夹不存在
-            file.mkdir();//创建文件夹
-        }
-        file = new File("D:\\人社政策文档库\\E司法解释\\省高院");
-        if (!file.exists()) {//如果文件夹不存在
-            file.mkdir();//创建文件夹
-        }
-        file = new File("D:\\人社政策文档库\\F规范性文件");
-        if (!file.exists()) {//如果文件夹不存在
-            file.mkdir();//创建文件夹
-        }
-        file = new File("D:\\人社政策文档库\\F规范性文件\\A政府");
-        if (!file.exists()) {//如果文件夹不存在
-            file.mkdir();//创建文件夹
-        }
-        file = new File("D:\\人社政策文档库\\F规范性文件\\A政府\\国务院");
-        if (!file.exists()) {//如果文件夹不存在
-            file.mkdir();//创建文件夹
-        }
-        file = new File("D:\\人社政策文档库\\F规范性文件\\A政府\\省政府");
-        if (!file.exists()) {//如果文件夹不存在
-            file.mkdir();//创建文件夹
-        }
-        file = new File("D:\\人社政策文档库\\F规范性文件\\A政府\\市政府");
-        if (!file.exists()) {//如果文件夹不存在
-            file.mkdir();//创建文件夹
-        }
-        file = new File("D:\\人社政策文档库\\F规范性文件\\B部委");
-        if (!file.exists()) {//如果文件夹不存在
-            file.mkdir();//创建文件夹
-        }
-        file = new File("D:\\人社政策文档库\\F规范性文件\\B部委\\财政部");
-        if (!file.exists()) {//如果文件夹不存在
-            file.mkdir();//创建文件夹
-        }
-        file = new File("D:\\人社政策文档库\\F规范性文件\\B部委\\教育部");
-        if (!file.exists()) {//如果文件夹不存在
-            file.mkdir();//创建文件夹
-        }
-        file = new File("D:\\人社政策文档库\\F规范性文件\\B部委\\劳动部");
-        if (!file.exists()) {//如果文件夹不存在
-            file.mkdir();//创建文件夹
-        }
-        file = new File("D:\\人社政策文档库\\F规范性文件\\B部委\\民政部");
-        if (!file.exists()) {//如果文件夹不存在
-            file.mkdir();//创建文件夹
-        }
-        file = new File("D:\\人社政策文档库\\F规范性文件\\B部委\\人社部");
-        if (!file.exists()) {//如果文件夹不存在
-            file.mkdir();//创建文件夹
-        }
-        file = new File("D:\\人社政策文档库\\F规范性文件\\B部委\\人事部");
-        if (!file.exists()) {//如果文件夹不存在
-            file.mkdir();//创建文件夹
-        }
-        file = new File("D:\\人社政策文档库\\F规范性文件\\B部委\\总工会");
-        if (!file.exists()) {//如果文件夹不存在
-            file.mkdir();//创建文件夹
-        }
-        file = new File("D:\\人社政策文档库\\F规范性文件\\B部委\\其他");
-        if (!file.exists()) {//如果文件夹不存在
-            file.mkdir();//创建文件夹
-        }
-        file = new File("D:\\人社政策文档库\\F规范性文件\\C省厅");
-        if (!file.exists()) {//如果文件夹不存在
-            file.mkdir();//创建文件夹
-        }
-        file = new File("D:\\人社政策文档库\\F规范性文件\\C省厅\\劳动厅");
-        if (!file.exists()) {//如果文件夹不存在
-            file.mkdir();//创建文件夹
-        }
-        file = new File("D:\\人社政策文档库\\F规范性文件\\C省厅\\人社厅");
-        if (!file.exists()) {//如果文件夹不存在
-            file.mkdir();//创建文件夹
-        }
-        file = new File("D:\\人社政策文档库\\F规范性文件\\C省厅\\人事厅");
-        if (!file.exists()) {//如果文件夹不存在
-            file.mkdir();//创建文件夹
-        }
-        file = new File("D:\\人社政策文档库\\F规范性文件\\C省厅\\其他");
-        if (!file.exists()) {//如果文件夹不存在
-            file.mkdir();//创建文件夹
-        }
-        file = new File("D:\\人社政策文档库\\F规范性文件\\D市局");
-        if (!file.exists()) {//如果文件夹不存在
-            file.mkdir();//创建文件夹
-        }
-        file = new File("D:\\人社政策文档库\\F规范性文件\\D市局\\劳动局");
-        if (!file.exists()) {//如果文件夹不存在
-            file.mkdir();//创建文件夹
-        }
-        file = new File("D:\\人社政策文档库\\F规范性文件\\D市局\\人事局");
-        if (!file.exists()) {//如果文件夹不存在
-            file.mkdir();//创建文件夹
-        }
-        file = new File("D:\\人社政策文档库\\F规范性文件\\D市局\\人社局");
-        if (!file.exists()) {//如果文件夹不存在
-            file.mkdir();//创建文件夹
-        }
-        file = new File("D:\\人社政策文档库\\F规范性文件\\D市局\\其他");
-        if (!file.exists()) {//如果文件夹不存在
-            file.mkdir();//创建文件夹
-        }
-
-
+        copyFolder(new File(MdFilesPath),new File(PdfFilesPath));
+        System.out.println("已完成文件夹复制。");
         filesDirs(MdFilesPath);
     }
-
-
 }
